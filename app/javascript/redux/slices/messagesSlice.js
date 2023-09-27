@@ -1,23 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getMessage } from "@reduxjs/toolkit/dist/actionCreatorInvariantMiddleware";
 
-export const fetchMessage = createAsyncThunk(
-  "messages/getMessage",
-  async () => {
-    try {
-      const response = await fetch("http://127.0.0.1:3000/api/random_greeting");
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      return data.greeting;
-    } catch (error) {
-      return error;
+export const getMessage = createAsyncThunk("messages/getMessage", async () => {
+  try {
+    const response = await fetch("http://127.0.0.1:3000/api/random_greeting");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
     }
+    const data = await response.json();
+    return data.greeting;
+  } catch (error) {
+    return error;
   }
-);
+});
 
-initialState = {
+const initialState = {
   error: undefined,
   message: undefined,
   pending: false,
